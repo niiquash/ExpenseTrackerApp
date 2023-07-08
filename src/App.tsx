@@ -8,14 +8,6 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [expenses, setExpenses] = useState([
     { id: 1, item: "Milk", price: 6.36, category: "Groceries" },
-    { id: 7, item: "Movie Tickets", price: 12.0, category: "Entertainment" },
-    { id: 4, item: "Phone", price: 35.97, category: "Utilities" },
-    { id: 2, item: "Cabbages", price: 5.09, category: "Groceries" },
-    { id: 5, item: "Water", price: 25.99, category: "Utilities" },
-    { id: 3, item: "Hot dogs", price: 2.99, category: "Groceries" },
-    { id: 6, item: "Electricity", price: 100.00, category: "Utilities" },
-    { id: 9, item: "Restaurant", price: 29.57, category: "Entertainment" },
-    { id: 8, item: "Water Park", price: 5.99, category: "Entertainment" },
   ]);
 
   const handleDelete = (id: number) => {
@@ -26,9 +18,23 @@ function App() {
     ? expenses.filter((expense) => expense.category === selectedCategory)
     : expenses;
 
+  const onSubmit = (newExpense: any) => {
+    setExpenses([
+      ...expenses,
+      {
+        id: expenses.length + 1,
+        item: newExpense.item,
+        price: parseFloat(newExpense.price),
+        category: newExpense.category,
+      },
+    ]);
+  };
+
   return (
     <div className="App">
-      <ExpenseForm />
+      <div className="mb-3">
+        <ExpenseForm onSubmit={onSubmit} />
+      </div>
       <ExpenseFilter
         onSelectCategory={(category) => setSelectedCategory(category)}
       />
