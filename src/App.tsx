@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
-import './App.css'
+import "./App.css";
 
 function App() {
   const [expenses, setExpenses] = useState([
@@ -10,10 +10,14 @@ function App() {
     { id: 3, item: "Movie Tickets", price: 12, category: "Entertainment" },
   ]);
 
+  const handleDelete = (id: number) => {
+    setExpenses(expenses.filter((expense) => expense.id !== id));
+  };
+
   return (
     <div className="App">
       <ExpenseForm />
-      <ExpenseList expenses={expenses} />
+      <ExpenseList handleDelete={handleDelete} expenses={expenses} />
     </div>
   );
 }

@@ -6,10 +6,11 @@ interface Expense {
 }
 
 interface Props {
-  expenses: Expense[];
+    expenses: Expense[];
+    handleDelete: (id: number) => void;
 }
 
-const ExpenseList = ({ expenses }: Props) => {
+const ExpenseList = ({ expenses, handleDelete }: Props) => {
   const total = expenses
     .reduce((acc, expense) => expense.price + acc, 0)
     .toFixed(2);
@@ -32,7 +33,12 @@ const ExpenseList = ({ expenses }: Props) => {
               <td>$ {expense.price.toFixed(2)}</td>
               <td>{expense.category}</td>
               <td>
-                <button className="btn btn-outline-danger">Delete</button>
+                <button
+                  onClick={() => handleDelete(expense.id)}
+                  className="btn btn-outline-danger"
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
