@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 
 interface Props {
-  onSubmit: (item: {}) => void;
+  onSubmit: (item: any) => void;
 }
 
 const ExpenseForm = ({ onSubmit }: Props) => {
